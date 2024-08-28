@@ -1,0 +1,58 @@
+body{
+    background-color: rgb(222, 219, 219);
+    margin: 0;
+}
+
+#container{
+    background-color: black;
+    width: 300px;
+    margin: 20px auto;
+    padding: 5px 10px;
+    text-align: center;
+    border-radius: 10px;
+    padding-bottom: 10px;
+}
+
+
+.row1{
+    display: flex
+}
+
+.numberButton,
+.zeroButton{
+    width: 60px;
+    height: 60px;
+    margin: 5px;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.zeroButton{ 
+    width: 130px
+}
+
+.operationButton,
+.bottomButton{ 
+    background-color: blanchedalmond;
+    width: 60px;
+    height: 60px;
+    margin: 5px;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.bottomButton{
+    width:130px;
+}
+
+.display{
+    height: 100px;
+    background-color:rgb(222, 219, 219);
+    margin: 10px 0;
+    color: white;
+    text-align: right;
+}
