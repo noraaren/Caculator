@@ -15,3 +15,19 @@ function divide(a,b){
 }
 
 
+let firstNumber = 3; // Example number
+let operator = "+"; // Example operator
+let secondNumber = 5; // Example number
+function operate(firstNumber, operator,secondNumber){
+    if(operator == "+"){
+        return add(firstNumber, secondNumber);
+    } else if(operator == "-"){
+        return subtract(firstNumber, secondNumber);
+    } else if(operator == "*"){
+        return mutiply(firstNumber, secondNumber);
+    }else if(operator == "/"){
+        return divide(firstNumber, secondNumber);
+    }
+}
+
+
