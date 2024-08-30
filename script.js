@@ -26,7 +26,7 @@ divisionButton.classList.add('operationButton');
 multiplicationButton.classList.add('operationButton');
 clearButton.classList.add('bottomButton');
 equalsButton.classList.add('bottomButton');
-display.classList.add('display')
+display.classList.add('display');
 
 dot.classList.add('numberButton');
 zero.classList.add('zeroButton');
@@ -40,11 +40,13 @@ seven.classList.add('numberButton');
 eight.classList.add('numberButton');
 nine.classList.add('numberButton'); 
 
-
-
-
+let displayNumber= ""; 
+let firstNumber = ""; 
+let operator = ""; 
+let secondNumber = ""; 
 
 // Optional: Append number buttons to the container if needed
+// Assuming rows (row1, row2, etc.) are defined somewhere in the HTML or JS.
 row4.appendChild(dot);
 row4.appendChild(zero);
 row3.appendChild(one);
@@ -66,13 +68,12 @@ row1.appendChild(multiplicationButton);
 row5.appendChild(clearButton);
 row5.appendChild(equalsButton);
 
-
-multiplicationButton.textContent = '*'
-divisionButton.textContent = '/'
-subtractionButton.textContent = '-'
-additionButton.textContent = '+'
-dot.textContent = '.'
-zero.textContent = '0'
+multiplicationButton.textContent = '*';
+divisionButton.textContent = '/';
+subtractionButton.textContent = '-';
+additionButton.textContent = '+';
+dot.textContent = '.';
+zero.textContent = '0';
 one.textContent = '1'; 
 two.textContent = '2'; 
 three.textContent = '3';
@@ -85,40 +86,88 @@ nine.textContent = '9';
 equalsButton.textContent = '=';
 clearButton.textContent = "AC";
 
+display.textContent = displayNumber;
 
-
-
-function add (a,b){
-    return a+b; 
+// Function definitions
+function add(a, b) {
+    return a + b; 
 }
 
-function subtract(a,b){
+function subtract(a, b) {
     return a - b;
 }
 
-function mutiply(a,b){
-    return a*b; 
+function multiply(a, b) {
+    return a * b; 
 }
 
-function divide(a,b){
-    return a/b;
+function divide(a, b) {
+    return a / b;
 }
 
-
-let firstNumber = 3; 
-let operator = "+"; 
-let secondNumber = 5; 
-
-function operate(firstNumber, operator,secondNumber){
-    if(operator == "+"){
+function operate(firstNumber, operator, secondNumber) {
+    firstNumber = parseFloat(firstNumber);
+    secondNumber = parseFloat(secondNumber);
+    
+    if (operator == "+") {
         return add(firstNumber, secondNumber);
-    } else if(operator == "-"){
+    } else if (operator == "-") {
         return subtract(firstNumber, secondNumber);
-    } else if(operator == "*"){
-        return mutiply(firstNumber, secondNumber);
-    }else if(operator == "/"){
+    } else if (operator == "*") {
+        return multiply(firstNumber, secondNumber);
+    } else if (operator == "/") {
         return divide(firstNumber, secondNumber);
     }
+}
+
+// Event listeners
+const numberButtons = [zero, one, two, three, four, five, six, seven, eight, nine]; 
+numberButtons.forEach(button =>{
+    button.addEventListener('click', event =>{
+        displayNumber += event.target.textContent;
+        updateDisplay(); 
+    });
+});
+
+const operatorButtons = [additionButton, subtractionButton, multiplicationButton, divisionButton];
+operatorButtons.forEach(button => {
+    button.addEventListener('click', (event) => {
+        if (firstNumber === "") {
+            firstNumber = displayNumber;
+            operator = event.target.textContent;
+            displayNumber = "";
+        } else if (operator) {
+            secondNumber = displayNumber;
+            displayNumber = operate(firstNumber, operator, secondNumber);
+            updateDisplay();
+            firstNumber = displayNumber;
+            operator = event.target.textContent;
+            displayNumber = "";
+        }
+    });
+});
+
+equalsButton.addEventListener('click', () => {
+    if (firstNumber && operator && displayNumber) {
+        secondNumber = displayNumber;
+        displayNumber = operate(firstNumber, operator, secondNumber);
+        updateDisplay();
+        firstNumber = displayNumber;
+        operator = "";
+    }
+});
+
+clearButton.addEventListener('click', () => {
+    displayNumber = "";
+    firstNumber = "";
+    operator = "";
+    secondNumber = "";
+    updateDisplay();
+});
+
+// Display update function
+function updateDisplay() {
+    display.textContent = displayNumber;
 }
 
 
