@@ -147,6 +147,11 @@ operatorButtons.forEach(button => {
     });
 });
 
+dot.addEventListener('click', event =>{
+    displayNumber += event.target.textContent;
+    updateDisplay(); 
+});
+
 equalsButton.addEventListener('click', () => {
     if (firstNumber && operator && displayNumber) {
         secondNumber = displayNumber;
